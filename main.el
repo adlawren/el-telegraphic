@@ -69,11 +69,14 @@
    (buffer-substring (region-beginning) (region-end))
    (let
        ((python-command
-         (format "/usr/bin/env python -c \"import nltk; print(nltk.pos_tag(nltk.word_tokenize(\'%s\')))\"" "This is a test")))
+         (format
+          "/usr/bin/env python -c \"import nltk; print(nltk.pos_tag(nltk.word_tokenize(\'%s\')))\""
+          "This is a test")))
      (message
       (remove-restricted-words
        (parse-word-tag-pairs
-        (if (eq (shell-command "which pyenv") 0)
+        (if
+            (eq (shell-command "which pyenv") 0)
             (shell-command-to-string
              (format "eval \"$(pyenv init -)\"; %s" python-command))
           (shell-command-to-string python-command)))
