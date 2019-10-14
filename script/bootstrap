@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+[[ $(which pyenv) ]] && eval "$(pyenv init -)"
 pip install nltk
 python -m nltk.downloader 'punkt'
 python -m nltk.downloader 'averaged_perceptron_tagger'
